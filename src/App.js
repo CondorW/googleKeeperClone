@@ -4,25 +4,30 @@ import Header from './Components/Header';
 import Note from './Components/Note';
 import Footer from './Components/Footer';
 import notes from "./notes";
+import Form from './Components/Form';
 
-function createNote(ele) {
-
-}
-
+var loggedIn = false;
 
 function App() {
-  return (
-    <div>
-      <Header />
-      {notes.map((ele => {
-        return (
-          <Note
-            noteTitle={ele.title}
-            noteContent={ele.content}
-          />
-        );
-      }))}
-      <Footer />
+  // return (
+  //   <div>
+  //     <Header />
+  //     {notes.map((ele => {
+  //       return (
+  //         <Note
+  //           noteTitle={ele.title}
+  //           noteContent={ele.content}
+  //         />
+  //       );
+  //     }))}
+  //     <Footer />
+  //   </div>
+  // );
+  return(
+    <div className="container">
+      <Form
+      isLoggedIn = {loggedIn}
+      />
     </div>
   );
 }

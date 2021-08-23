@@ -10,14 +10,29 @@ import NoteCounter from "./Components/NoteCounter";
 var loggedIn = true;
 
 function App() {
-  const [cName, sName] = useState("");
-  const [cHeading, sHeading] = useState("");
-  function namePrint(evt) {
-    sName(evt.target.value);
-  }
-  function headingChange(evt){
-    sHeading(cName);
-    evt.preventDefault();
+
+  const [cObj, sObj] = useState({
+    fName: "",
+    lName: ""
+  });
+
+  function changeHeading(evtInfo) {
+
+    const { name, value } = evtInfo.target;
+    sObj(prevValue =>{
+    if (name === "fName") {
+      return({
+        fName:value,
+        lName:"prevValue.lName"
+      });
+    }
+    else if (name === "lName") {
+      return({
+        fName: "prevValue.fName",
+        lName: value
+      });
+    }
+  })
   }
 
   // const time = new Date().toLocaleTimeString();
@@ -51,19 +66,19 @@ function App() {
   //       onMouseOver={mouseOverEvent}
   //       onMouseOut={mouseOutEvent}
   //       style={{ backgroundColor: isMousedOver ? "white" : "red" }}
-  //       >State changin Button
+  //       >State changin Button 
   //     </button>
   //     <Footer />
   //   </div>
   // );
   return (
     <div className="container">
-      <h1>Hello {cHeading}</h1>
+      <h1>Hello {cObj.fName}{cObj.lName}</h1>
       <form className="form">
-        <input onChange={namePrint} type="text" placeholder="Username" />
+        <input onChange={changeHeading} type="text" placeholder="First Name" name="fName" />
+        <input onChange={changeHeading} type="text" placeholder="Last Name" name="lName"/>
         <input type="password" placeholder="Password" />
-        {loggedIn ? null : <input type="password" placeholder="Confirm Password" />}
-        <button onClick={headingChange} className="form-button" type="submit">{loggedIn ? "Login" : "Register"}</button>
+        <button className="form-button" type="submit">{loggedIn ? "Login" : "Register"}</button>
       </form>
     </div>
   );

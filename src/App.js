@@ -11,12 +11,13 @@ var loggedIn = true;
 
 function App() {
   const [cName, sName] = useState("");
+  const [cHeading, sHeading] = useState("");
   function namePrint(evt) {
     sName(evt.target.value);
   }
-  const [cHeading, sHeading] = useState("");
-  function headingChange(){
+  function headingChange(evt){
     sHeading(cName);
+    evt.preventDefault();
   }
 
   // const time = new Date().toLocaleTimeString();

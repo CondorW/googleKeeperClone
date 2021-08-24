@@ -12,28 +12,38 @@ var loggedIn = true;
 function App() {
 
   const [cObj, sObj] = useState({
-    fName: "",
-    lName: ""
-  });
-
-  function changeHeading(evtInfo) {
-
-    const { name, value } = evtInfo.target;
-    sObj(prevValue =>{
-    if (name === "fName") {
-      return({
-        fName:value,
-        lName: prevValue.lName
-      });
-    }
-    else if (name === "lName") {
-      return({
-        fName: prevValue.fName,
-        lName: value
-      });
-    }
+    fName:"",
+    lName:"",
+    eMail:""
   })
+
+function changeState(evt){
+  let tValue = evt.target.value;
+  let tName = evt.target.name;
+  console.log(tValue, tName);
+  if (tName === "fName") {
+    sObj((cObj) => ({
+      fName: tValue,
+      lName: cObj.lName,
+      eMail: cObj.eMail
+    }));
   }
+  else if(tName === "lName"){
+    sObj((cObj) => ({
+      fName: cObj.fName,
+      lName: tValue,
+      eMail: cObj.eMail
+    }));
+  }
+  else if(tName === "eMail"){
+    sObj((cObj) => ({
+      fName: cObj.fName,
+      lName: cObj.lName,
+      eMail: tValue
+    }));
+  }
+}
+
 
   // const time = new Date().toLocaleTimeString();
   // const [cTime, sTime] = useState(time);
@@ -73,11 +83,12 @@ function App() {
   // );
   return (
     <div className="container">
-      <h1>Hello {cObj.fName}{cObj.lName}</h1>
+      <h1>Hello {cObj.fName} {cObj.lName}</h1>
+      <p>{cObj.eMail}</p>
       <form className="form">
-        <input onChange={changeHeading} type="text" placeholder="First Name" name="fName" />
-        <input onChange={changeHeading} type="text" placeholder="Last Name" name="lName"/>
-        <input type="password" placeholder="Password" />
+        <input onChange={changeState} type="text" placeholder="First Name" name="fName" />
+        <input onChange={changeState} type="text" placeholder="Last Name" name="lName"/>
+        <input onChange={changeState} type="email" placeholder="Your Mail" name="eMail" />
         <button className="form-button" type="submit">{loggedIn ? "Login" : "Register"}</button>
       </form>
     </div>

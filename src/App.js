@@ -23,12 +23,12 @@ function App() {
     if (name === "fName") {
       return({
         fName:value,
-        lName:"prevValue.lName"
+        lName: prevValue.lName
       });
     }
     else if (name === "lName") {
       return({
-        fName: "prevValue.fName",
+        fName: prevValue.fName,
         lName: value
       });
     }

@@ -11,66 +11,47 @@ var loggedIn = true;
 
 function App() {
 
-  const [cObj, sObj] = useState({
-    fName: "",
-    lName: "",
-    eMail: ""
-  });
 
-  function changeStateImp(evt){
-    const {name, value} = evt.target;
-    sObj((cObj)=>({
-      ...cObj,
-      [name]: value
-    }))
-  }
-// const time = new Date().toLocaleTimeString();
-// const [cTime, sTime] = useState(time);
-// const [isMousedOver, setMouseOver] = useState(false);
-// function mouseOverEvent() {
-//   setMouseOver(true);
-// }
-// function mouseOutEvent() {
-//   setMouseOver(false);
-// }
-// setInterval(updateTime, 1000);
-// function updateTime() {
-//   const newTime = new Date().toLocaleTimeString();
-//   sTime(newTime);
-// }
-// return (
-//   <div>
-//     <Header />
-//     {notes.map((ele => {
-//       return (
-//         <Note
-//           noteTitle={ele.title}
-//           noteContent={ele.content}
-//         />
-//       );
-//     }))}
-//     <NoteCounter />
-//     <div>{cTime}</div>
-//     <button
-//       onMouseOver={mouseOverEvent}
-//       onMouseOut={mouseOutEvent}
-//       style={{ backgroundColor: isMousedOver ? "white" : "red" }}
-//       >State changin Button 
-//     </button>
-//     <Footer />
-//   </div>
-// );
+  const [cValue,sValue]=useState("");
+  const [cList,sList]=useState([]);
+
+
+function stateSave(evt){
+  const value = evt.target.value;
+  sValue(value);
+}
+
+function addItem(){
+  sList((cList)=>{
+    return([
+      ...cList,
+      cValue
+    ]);
+  })
+}
+
+
 return (
   <div className="container">
-    <h1>Hello {cObj.fName} {cObj.lName}</h1>
-    <p>{cObj.eMail}</p>
-    <form className="form">
-      <input onChange={changeStateImp} type="text" placeholder="First Name" name="fName" />
-      <input onChange={changeStateImp} type="text" placeholder="Last Name" name="lName" />
-      <input onChange={changeStateImp} type="email" placeholder="Your Mail" name="eMail" />
-      <button className="form-button" type="submit">{loggedIn ? "Login" : "Register"}</button>
-    </form>
-  </div>
+      <div className="heading">
+        <h1>To-Do List</h1>
+      </div>
+      <div className="form">
+        <input onChange={stateSave} type="text" name="inputField" />
+        <button onClick={addItem}>
+          <span>Add</span>
+        </button>
+      </div>
+      <div>
+        <ul>
+        {cList.map((litem)=>{
+          return(
+            <li>{litem}</li>
+          );
+        })}
+          </ul>
+      </div>
+    </div>
 );
 }
 export default App;

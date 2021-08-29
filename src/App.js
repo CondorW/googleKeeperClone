@@ -5,17 +5,50 @@ import Note from './Components/Note';
 import Footer from './Components/Footer';
 import CreateArea from './Components/CreateArea';
 
-var loggedIn = true;
+
+
+
 
 function App() {
 
+  const [cItemTitle, sItemTitle] = useState([]);
+  const [cItemText, sItemText] = useState([]);
+
+  function addNote(TitleInput, TextInput,e) {
+    sItemTitle(prevItemTitle => {
+      return [...prevItemTitle, TitleInput];
+    })
+    sItemText(prevItemText => {
+      return [...prevItemText, TextInput];
+    })
+    e.preventDefault();
+  }
+  function deleteNote(id){
+    sItemTitle(prevItemTitle => {
+      return (prevItemTitle.filter((element,index)=>{return(index != id);}));
+    })
+    sItemText(prevItemText => {
+      return (prevItemText.filter((element,index)=>{return(index != id);}));
+    })
+  }
+
+
   return (
-      <div>
-        <Header />
-        <CreateArea />
-        <Note key={1} title="Note title" content="Note content" />
-        <Footer />
-      </div>
-    );
+    <div>
+      <Header />
+      <CreateArea
+        onClick={addNote} />
+      {cItemTitle.map((itemTitle,index)=>
+      <Note
+        key={index}
+        title={itemTitle}
+        content={cItemText[index]}
+        deleteNote={deleteNote}
+        id={index}
+      />)}
+      <Note/>
+      <Footer />
+    </div>
+  );
 }
 export default App;

@@ -85,6 +85,7 @@ footer p {
 .note h1 {
   font-size: 1.1em;
   margin-bottom: 6px;
+  color: black;
 }
 .note p {
   font-size: 1.1em;
@@ -114,8 +115,7 @@ form {
   border-radius: 7px;
   box-shadow: 0 1px 5px rgb(138, 137, 137);
 }
-form input,
-form textarea {
+form input, form textarea {
   width: 100%;
   border: none;
   padding: 4px;
@@ -123,6 +123,7 @@ form textarea {
   font-size: 1.2em;
   font-family: inherit;
   resize: none;
+  color: black;
 }
 form button {
   position: absolute;

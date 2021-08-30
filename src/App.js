@@ -46,7 +46,6 @@ function App() {
         deleteNote={deleteNote}
         id={index}
       />)}
-      <Note/>
       <Footer />
     </div>
   );
